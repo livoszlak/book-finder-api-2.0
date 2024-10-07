@@ -4,6 +4,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import BookItemBack from "./BookItemBack";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
 export default function BookItem({ book }) {
   const { title, authors, imageLinks, canonicalVolumeLink } = book.volumeInfo;
@@ -23,13 +24,14 @@ export default function BookItem({ book }) {
   return (
     <div>
       <Card sx={cardStyle} onClick={handleOpen}>
-        <CardMedia
+        {imageLinks ? <CardMedia
           component="img"
           sx={{ objectFit: "contain" }}
           height="200"
           image={imageLinks?.thumbnail?.replace(/&edge=curl/g, "")}
           alt={`Cover of ${title} by ${authors?.join(", ")}`}
         />
+          : <ImageNotSupportedIcon style={{ fontSize: 40, height: 200 }} color="action" />}
         <CardActions
           disableSpacing
           sx={{
