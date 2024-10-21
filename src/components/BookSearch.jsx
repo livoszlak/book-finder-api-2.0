@@ -41,7 +41,10 @@ const BookSearch = ({ onSearch, searchParams }) => {
         alignItems: "center",
         marginBottom: 2,
       }}
+      role="region" // Indicate this is a search region
+      aria-labelledby="book-search-title" // Link to the title
     >
+      <h2 id="book-search-title" style={{ display: 'none' }}>Book Search</h2> {/* Hidden heading for screen readers */}
       <TextField
         label="Search for books"
         value={searchValue}
@@ -51,10 +54,11 @@ const BookSearch = ({ onSearch, searchParams }) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Search />
+              <Search aria-hidden="true" /> {/* Hide icon from screen readers */}
             </InputAdornment>
           ),
         }}
+        aria-label="Search for books" // Provide label for assistive technologies
       />
       <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
         <Select
@@ -62,6 +66,7 @@ const BookSearch = ({ onSearch, searchParams }) => {
           onChange={(e) => setSearchType(e.target.value)}
           variant="outlined"
           fullWidth
+          aria-label="Select search type" // Provide label for assistive technologies
         >
           <MenuItem value="title">Title</MenuItem>
           <MenuItem value="author">Author</MenuItem>
@@ -72,6 +77,7 @@ const BookSearch = ({ onSearch, searchParams }) => {
           onChange={(e) => setLanguage(e.target.value)}
           variant="outlined"
           fullWidth
+          aria-label="Select language" // Provide label for assistive technologies
         >
           {languages.map((language) => (
             <MenuItem key={language.lang} value={language.lang}>
@@ -84,6 +90,7 @@ const BookSearch = ({ onSearch, searchParams }) => {
           onChange={(e) => setSortType(e.target.value)}
           variant="outlined"
           fullWidth
+          aria-label="Select sort type" // Provide label for assistive technologies
         >
           <MenuItem value="relevance">Relevance</MenuItem>
           <MenuItem value="newest">Newest</MenuItem>

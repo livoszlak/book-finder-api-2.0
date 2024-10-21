@@ -5,9 +5,17 @@ const Paginate = ({ booksPerPage, totalBooks, paginate }) => {
   for (let i = 1; i <= Math.ceil(totalBooks / booksPerPage); i++) {
     pageNumber.push(i);
   }
+
   return (
-    <Box>
-      <Pagination count={pageNumber.length} onChange={(e, p) => paginate(p)} />
+    <Box
+      role="navigation" // Indicate that this is a navigation section
+      aria-label="Pagination controls" // Provide a label for the navigation
+    >
+      <Pagination
+        count={pageNumber.length}
+        onChange={(e, p) => paginate(p)}
+        aria-label="Page navigation" // Provide an accessible label for pagination
+      />
     </Box>
   );
 };

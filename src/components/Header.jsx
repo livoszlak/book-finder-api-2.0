@@ -4,8 +4,9 @@ const Header = () => {
       <img
         className="header-img"
         src="./bookfinderlogo.svg"
-        alt="Book Finder Header"
-      ></img>
+        alt="Book Finder logo" // Simplified alt text
+        role="img" // Indicate that this is an image
+      />
     </header>
   );
 };

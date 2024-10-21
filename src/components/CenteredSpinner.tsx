@@ -2,13 +2,12 @@ import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-interface CenterdSpinnerProps{
-    height?: number;
-    size?: number;
+interface CenteredSpinnerProps {
+  height?: number;
+  size?: number;
 }
 
-const CenterdSpinner = ({height, size}:CenterdSpinnerProps) => {
-
+const CenteredSpinner = ({ height, size }: CenteredSpinnerProps) => {
   return (
     <Box
       sx={{
@@ -18,12 +17,14 @@ const CenterdSpinner = ({height, size}:CenterdSpinnerProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        mt: 2
+        mt: 2,
       }}
+      role="status" // Indicate that this is a loading status
+      aria-live="polite" // Notify screen readers of loading status
     >
-      <CircularProgress size={size}/>
+      <CircularProgress size={size} aria-label="Loading..." /> {/* Provide label for accessibility */}
     </Box>
   );
 };
 
-export default CenterdSpinner;
+export default CenteredSpinner;

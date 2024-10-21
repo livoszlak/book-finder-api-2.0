@@ -31,6 +31,7 @@ export default function BookItemBack({
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-authors"
+      closeAfterTransition // Improves focus management and accessibility
     >
       <Box
         sx={{
@@ -42,6 +43,8 @@ export default function BookItemBack({
           alignItems: "center",
           justifyContent: "space-evenly",
         }}
+        role="dialog" // Indicate this Box is a dialog
+        aria-modal="true" // Indicate it is a modal
       >
         <Box className="text-wrapper">
           <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -51,14 +54,8 @@ export default function BookItemBack({
             {authors?.join(", ")}
           </Typography>
         </Box>
-        <IconButton aria-label="link to book">
-          <a
-            href={canonicalVolumeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LinkIcon sx={{ height: "2em", width: "2em" }} />
-          </a>
+        <IconButton aria-label="Link to book" onClick={() => window.open(canonicalVolumeLink, '_blank', 'noopener,noreferrer')}>
+          <LinkIcon sx={{ height: "2em", width: "2em" }} />
         </IconButton>
       </Box>
     </Modal>

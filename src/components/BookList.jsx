@@ -10,6 +10,7 @@ const BookList = ({ books }) => {
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
       <Box
@@ -21,7 +22,10 @@ const BookList = ({ books }) => {
           gap: "1rem",
           marginBottom: "2rem",
         }}
+        role="region" // Indicate this is a region of related content
+        aria-labelledby="book-list-title" // Link to the heading
       >
+        <h2 id="book-list-title" style={{ display: 'none' }}>Book List</h2> {/* Hidden heading for screen readers */}
         {currentBooks.map((book, index) => (
           <BookItem key={book.id || index} book={book} />
         ))}
@@ -29,6 +33,8 @@ const BookList = ({ books }) => {
       <Box
         className="pagination-wrapper"
         sx={{ display: "flex", justifyContent: "center" }}
+        role="navigation" // Indicate this is a navigation region
+        aria-label="Pagination controls" // Provide a label for navigation
       >
         <Paginate
           booksPerPage={booksPerPage}

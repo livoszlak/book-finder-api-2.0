@@ -3,7 +3,7 @@ import BookSearch from "./components/BookSearch";
 import BookList from "./components/BookList";
 import Header from "./components/Header";
 import useFetchBooks from "./hooks/useFetchBooks";
-import CenterdSpinner from "./components/CenteredSpinner";
+import CenteredSpinner from "./components/CenteredSpinner";
 import "./App.css";
 
 const App = () => {
@@ -13,6 +13,7 @@ const App = () => {
     language: "en",
     sortType: "relevance",
   });
+  
   const { books, loading, error, success } = useFetchBooks(searchParams);
 
   const handleSearch = (searchValue, searchType, language, sortType) => {
@@ -20,11 +21,11 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div role="main"> {/* Indicate main content for assistive technologies */}
       <Header />
       <BookSearch onSearch={handleSearch} searchParams={searchParams} />
-      {loading && <CenterdSpinner />}
-      {error && <p>Error: {error.message}</p>}
+      {loading && <CenteredSpinner />}
+      {error && <p aria-live="assertive">Error: {error.message}</p>} {/* Announce error messages */}
       {success && <BookList books={books} />}
     </div>
   );

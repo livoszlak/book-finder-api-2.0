@@ -22,13 +22,20 @@ export default function BookItem({ book }) {
 
   return (
     <div>
-      <Card sx={cardStyle} onClick={handleOpen}>
+      <Card
+        sx={cardStyle}
+        onClick={handleOpen}
+        role="button" // Ensure the Card behaves like a button
+        tabIndex={0} // Make the Card focusable
+        onKeyPress={(e) => { if (e.key === 'Enter') handleOpen(); }} // Allow keyboard activation
+        aria-label={`View details for ${title} by ${authors?.join(", ")}`} // Provide an accessible label
+      >
         <CardMedia
           component="img"
           sx={{ objectFit: "contain" }}
           height="200"
           image={imageLinks?.thumbnail?.replace(/&edge=curl/g, "")}
-          alt={`Cover of ${title} by ${authors?.join(", ")}`}
+          alt={`Cover of ${title} by ${authors?.join(", ")}`} // Alt text already descriptive
         />
         <CardActions
           disableSpacing
@@ -40,7 +47,13 @@ export default function BookItem({ book }) {
             justifyContent: "center",
           }}
         >
-          <MoreHorizIcon sx={{ height: "2em", width: "2em" }} />
+          <MoreHorizIcon 
+            sx={{ height: "2em", width: "2em" }} 
+            aria-label="More options" // Add label for icon button
+            role="button" // Indicate that it's a button
+            tabIndex={0} // Make it focusable
+            onKeyPress={(e) => { if (e.key === 'Enter') handleOpen(); }} // Allow keyboard activation
+          />
         </CardActions>
       </Card>
       <BookItemBack
